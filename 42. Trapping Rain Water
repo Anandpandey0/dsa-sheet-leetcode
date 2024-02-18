@@ -1,0 +1,58 @@
+// Ts solution 
+
+function trap(height: number[]): number {
+    let count : number = 0;
+    let leftMax:number[] = [];
+    let rightMax:number[] = [];
+    let maxi : number = height[0];
+    for( let i  of height){
+        if(i>maxi)maxi= i;
+        leftMax.push(maxi);
+    }
+    maxi = height[height.length-1]
+    for(let i = height.length-1 ; i>=0;i--){
+        if(height[i]>maxi)maxi=height[i];
+        rightMax.push(maxi);
+    }
+    rightMax.reverse();
+    for(let i = 0;i<height.length;i++){
+        let x : number = Math.min(leftMax[i],rightMax[i]);
+        count += Math.abs(x-height[i]);
+    }
+
+
+
+    return count;
+};
+
+// CPP Solution
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        vector<int>leftMax;
+        vector<int>rightMax;
+        int maxi = height[0];
+        for(auto i : height){
+            if(i>maxi){
+                maxi= i;
+            }
+            leftMax.push_back(maxi);
+        }
+        maxi = height[height.size()-1];
+        for(int i = height.size()-1;i>=0;i--){
+            if(height[i]>maxi){
+                maxi= height[i];
+            }
+            rightMax.push_back(maxi);
+        }
+        reverse(rightMax.begin(),rightMax.end());
+        int count=0;
+        //for(auto i : rightMax)cout<<i<<endl;
+        for(int i = 0;i<height.size();i++){
+            int x = min(leftMax[i],rightMax[i]);
+            count+= abs(x - height[i]);
+        }
+        return count;
+    }
+};
